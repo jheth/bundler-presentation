@@ -21,19 +21,19 @@
 # Gem Management #
 
 * gem install, update, uninstall
-* Installed system wide (gem list)
 * Requires root access
+* Installed system wide (gem list)
 * Multiple versions on the same machine
-* Code has to specify supported version
+* Code should specify supported version
 
 !SLIDE bullets incremental transition=fade
 
 # Why Bundler? #
 
-* Remove sysadmins from the picture
 * Documented and tested dependencies
+* Don't need root level access
+* Remove sysadmins from the picture (they have better things to do)
 * Control over development and production environments
-* Results in fewer VMs
 
 !SLIDE bullets incremental transition=fade
 
@@ -41,94 +41,92 @@
 
 * bundle init
 * Starts with the Gemfile
+* List out required gems
 * Specify exact version, range or no version
 * Single or Multiple sources
 
 !SLIDE bullets incremental transition=fade
 
-~~~
-source "http://rubygems.org"
-# source :rubygems
-# source "http://gems.sentryds.com"
-
-gem 'jabber-bot'
-gem 'dbi'
-gem 'oci8', '2.0.1'
-gem 'mygem', :git => 'git://git.sentryds.com/jheth/messenger.git'
-
-group :development, :test do
-   gem 'mocha'
-   gem 'test-unit'
-   gem 'rdoc'
-   gem 'rspec''
-end
-~~~
+> source "http://rubygems.org"  
+> source "http://gems.sentryds.com"  
+>   
+> gem 'jabber-bot'  
+> gem 'dbi', '2.0.1'  
+> gem 'nokogiri', '>= 1.4.2'  
+> gem 'RedCloth', '>= 4.1.0', '< 4.2.0'  
+>   
+> gem 'sentryds-utl', :git => 'git://git.sentryds.com/Core/sentryds-util.git'  
+>   
+> group :development, :test do  
+>    gem 'mocha'  
+>    gem 'rspec''  
+>    gem 'rdoc'  
+> end  
 
 !SLIDE bullets incremental transition=fade
 
-# Installing Gems with Bundler #
+# Managing Gems with Bundler #
 
 * bundle install (default system location)
 * bundle install --path=vendor
-* bundle update gem-name
+* bundle install --path=vendor --without development test
+* bundle update [gem-name]
 
 !SLIDE bullets incremental transition=fade
 
-# Generated Files $
+# Generated Files #
 
 * Gemfile.lock
-
 * .bundle/config
-	bundle config
-
+	* bundle config
 * vendor
-	bundle check
-	bundle list
-	bundle show rdoc
-	bundle viz
-	bundle open jabber-bot
-		set $EDITOR or $BUNDLER_EDITOR
+	* bundle check
+	* bundle list
+	* bundle show rdoc
+	* bundle viz (requires graphviz)
+	* bundle open jabber-bot
+		* set $EDITOR or $BUNDLER_EDITOR
+
 
 !SLIDE bullets incremental transition=fade
 
 # Your Code + Bundler #
 
-~~~
-require 'rubygems'
-require 'bundler/setup'
-
-require 'jabber-bot'
-
-bot = Jabber::Bot.new
-bot.connect
-~~~
+* 
+> require 'rubygems'
+> require 'bundler/setup'
+> &nbsp;
+> require 'jabber-bot'
+> &nbsp;
+> bot = Jabber::Bot.new
+> bot.connect
 
 !SLIDE bullets incremental transition=fade
 
 # Testing / Debugging #
 
 * bundle exec 
-	bundle exec script.rb
+	* bundle exec script.rb
 * bundle console
-	IRB Sesssion with proper environment
+	* IRB Sesssion with proper environment
+
 
 !SLIDE bullets incremental transition=fade
 
 # Creating your own Gem with Bundler #
 
-* bundle gem <name>
+* bundle gem [name]
 * Initialized git repository with all necessary files
-
-~~~
-jheth$ bundle gem carbon
-      create  carbon/Gemfile
-      create  carbon/Rakefile
-      create  carbon/.gitignore
-      create  carbon/carbon.gemspec
-      create  carbon/lib/carbon.rb
-      create  carbon/lib/carbon/version.rb
-Initializating git repo in /Users/jheth/carbon
-~~~
+* 
+> jheth$ bundle gem carbon
+>       create  carbon/Gemfile
+>       create  carbon/Rakefile
+>       create  carbon/.gitignore
+>       create  carbon/carbon.gemspec
+>       create  carbon/lib/carbon.rb
+>       create  carbon/lib/carbon/version.rb
+> Initializating git repo in /Users/jheth/carbon
+> 
 
 !SLIDE bullets incremental transition=fade
 
@@ -137,9 +135,9 @@ Initializating git repo in /Users/jheth/carbon
 * Update .gemspec 
 * Add/edit lib and/or bin files
 * rake -T
-	rake build
-	rake install
-	rake release
+	* rake build
+	* rake install
+	* rake release
 * git add remote
 * git push
 
@@ -162,4 +160,10 @@ S: bundle install
 P: The specific gem version may no longer be available, so verify the gem version number.
 S: svn update / git pull (or fix version yourself)
    bundle install
+
+P: It's prompting me for a root password?
+S: By default bundler will install to the system location. Run bundle install with the --path argument.
+
+P: Rake version is conflicting with an already loaded version.
+S: bundle exec [command]
 
