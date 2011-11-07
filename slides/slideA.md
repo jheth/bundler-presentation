@@ -113,7 +113,7 @@
 
 !SLIDE bullets incremental transition=fade
 
-# Creating your own Gem with Bundler #
+# Create your own Gem #
 
 * bundle gem [name]
 * Initialized git repository with all necessary files
@@ -132,12 +132,9 @@
 
 # Making it functional #
 
-* Update .gemspec 
+* Rake Tasks (rake -T)
+* Update .gemspec
 * Add/edit lib and/or bin files
-* rake -T
-	* rake build
-	* rake install
-	* rake release
 * git add remote
 * git push
 
@@ -145,25 +142,34 @@
 
 # Add to Gemfile #
 
-* gem 'carbon', :git => 'git://git.sentryds.com/jheth/carbon.git'
-* bundle install
+    gem 'carbon', :git => 'git://git.sentryds.com/jheth/carbon.git'
+
+    jheth$ bundle install
 
 !SLIDE bullets incremental transition=fade
 
 # Resolving Common Errors #
 
-"Could not find gem 'rspec (>= 0)' in any of the gem sources listed in your Gemfile"
+* Error: "Could not find gem 'rspec (>= 0)' in any of the gem sources listed in your Gemfile"
+* Possible Causes: 
+*     Gemfile changed and necessary gems are not installed (i.e svn update).
+*     Specified gem version no longer exists in any repositories (you need to svn update).
+* Solution: svn update / git pull && bundle install
 
-P: You've update the code but not the bundle.
-S: bundle install
 
-P: The specific gem version may no longer be available, so verify the gem version number.
-S: svn update / git pull (or fix version yourself)
-   bundle install
+!SLIDE bullets incremental transition=fade
 
-P: It's prompting me for a root password?
-S: By default bundler will install to the system location. Run bundle install with the --path argument.
+# Resolving Common Errors #
 
-P: Rake version is conflicting with an already loaded version.
-S: bundle exec [command]
+* Error: It's prompting me for a root password?
+* Cause: Bundler installs to the default system location. 
+* Solution: Run bundle install with the --path argument.
+
+!SLIDE bullets incremental transition=fade
+
+# Resolving Common Errors #
+
+* Error: Rake version is conflicting with an already loaded version.
+* Reason: The system Rake is conflicting with the local Rake that bundler installed. 
+* Solution:: bundle exec [command]
 
