@@ -12,19 +12,21 @@
 # Gem Overview #
 
 * [http://rubygems.org](http://rubygems.org)
-* A packaged ruby library.
+* A packaged ruby library (lib, bin, test)
 * Gemspec File
-* Describes version, dependencies, files, etc.
+* Description, version, dependencies, files, etc.
 
 !SLIDE bullets incremental transition=fade
 
 # Gem Management #
 
-* gem install, update, uninstall
-* Requires root access
-* Installed system wide (gem list)
-* Multiple versions on the same machine
-* Code should specify supported version
+ * gem install, update, uninstall
+ * Requires root access
+	* Caveat: `gem install -i ~/gems showoff`
+ * Installed system wide 
+	* `gem list`
+ * Multiple versions on the same machine
+ * Code should specify supported version
 
 !SLIDE bullets incremental transition=fade
 
@@ -47,30 +49,34 @@
 
 !SLIDE bullets incremental transition=fade
 
-> source "http://rubygems.org"  
-> source "http://gems.sentryds.com"  
->   
-> gem 'jabber-bot'  
-> gem 'dbi', '2.0.1'  
-> gem 'nokogiri', '>= 1.4.2'  
-> gem 'RedCloth', '>= 4.1.0', '< 4.2.0'  
->   
-> gem 'sentryds-utl', :git => 'git://git.sentryds.com/Core/sentryds-util.git'  
->   
-> group :development, :test do  
->    gem 'mocha'  
->    gem 'rspec''  
->    gem 'rdoc'  
-> end  
+# Example Gemfile
+    @@@ ruby
+    source "http://rubygems.org"
+    source "http://gems.sentryds.com"
+    
+    gem 'jabber-bot'
+    gem 'nokogiri', '>= 1.4.2'
+    gem 'RedCloth', '>= 4.1.0', '< 4.2.0'
+    gem 'thin', '~>1.1' # Covers 1.1 - 2.0
+    
+    gem 'sentryds-util', 
+	   :git => 'git://git.sentryds.com/Core/sentryds-util.git'
+    
+    group :development, :test do
+       gem 'mocha'
+       gem 'rspec', '2.0.1'
+       gem 'rdoc'
+    end
 
 !SLIDE bullets incremental transition=fade
 
 # Managing Gems with Bundler #
 
-* bundle install (default system location)
-* bundle install --path=vendor
-* bundle install --path=vendor --without development test
-* bundle update [gem-name]
+  * `bundle install`
+	* default system location $GEM_PATH
+  * `bundle install --path=vendor`
+  * `bundle install --path=vendor --without development test`
+  * `bundle update [gem-name]`
 
 !SLIDE bullets incremental transition=fade
 
@@ -92,14 +98,16 @@
 
 # Your Code + Bundler #
 
-* 
-> require 'rubygems'
-> require 'bundler/setup'
-> &nbsp;
-> require 'jabber-bot'
-> &nbsp;
-> bot = Jabber::Bot.new
-> bot.connect
+    @@@ ruby
+    require 'rubygems'
+    require 'bundler/setup'
+
+    require 'jabber-bot'
+
+    config = {...}
+    bot = Jabber::Bot.new(config)
+    ...
+    bot.connect
 
 !SLIDE bullets incremental transition=fade
 
@@ -114,19 +122,17 @@
 !SLIDE bullets incremental transition=fade
 
 # Create your own Gem #
+## bundle gem [gem-name]
 
-* bundle gem [name]
-* Initialized git repository with all necessary files
-* 
-> jheth$ bundle gem carbon
->       create  carbon/Gemfile
->       create  carbon/Rakefile
->       create  carbon/.gitignore
->       create  carbon/carbon.gemspec
->       create  carbon/lib/carbon.rb
->       create  carbon/lib/carbon/version.rb
-> Initializating git repo in /Users/jheth/carbon
-> 
+    @@@ php
+    jheth$ bundle gem carbon
+       create  carbon/Gemfile
+       create  carbon/Rakefile
+       create  carbon/.gitignore
+       create  carbon/carbon.gemspec
+       create  carbon/lib/carbon.rb
+       create  carbon/lib/carbon/version.rb
+    Initializating git repo in /Users/jheth/carbon
 
 !SLIDE bullets incremental transition=fade
 
@@ -142,22 +148,40 @@
 
 # Add to Gemfile #
 
-    gem 'carbon', :git => 'git://git.sentryds.com/jheth/carbon.git'
+    @@@ ruby
+    gem 'carbon', 
+	       :git => 'git://git.sentryds.com/jheth/carbon.git'
 
     jheth$ bundle install
 
 !SLIDE bullets incremental transition=fade
 
+# Clean Environment #
+
+Bundler's environment changes propogate to forked processes.
+
+    @@@ ruby
+    require 'rubygems'
+    require 'bundler/setup'
+
+    def run_importer
+        Bundler.with_clean_env do
+           `ruby importer.rb`
+        end
+    end
+
+!SLIDE incremental transition=fade
+
 # Resolving Common Errors #
 
-* Error: "Could not find gem 'rspec (>= 0)' in any of the gem sources listed in your Gemfile"
-* Possible Causes: 
-*     Gemfile changed and necessary gems are not installed (i.e svn update).
-*     Specified gem version no longer exists in any repositories (you need to svn update).
+* Error: "Could not find gem 'nokogiri (= 3.2.1) ruby' in any of the gem sources listed in your Gemfile."  
+* Possible Causes:  
+	* Gemfile changed and necessary gems are not installed.  
+	* Specified gem version no longer exists in any repositories.  
+	* You typed the name of the gem wrong.
 * Solution: svn update / git pull && bundle install
 
-
-!SLIDE bullets incremental transition=fade
+!SLIDE incremental transition=fade
 
 # Resolving Common Errors #
 
@@ -165,11 +189,15 @@
 * Cause: Bundler installs to the default system location. 
 * Solution: Run bundle install with the --path argument.
 
-!SLIDE bullets incremental transition=fade
+!SLIDE incremental transition=fade
 
-# Resolving Common Errors #
+# Resolving Common Errors
 
-* Error: Rake version is conflicting with an already loaded version.
-* Reason: The system Rake is conflicting with the local Rake that bundler installed. 
-* Solution:: bundle exec [command]
+* Error: "You have already activated rake 0.9.2, but your Gemfile requires rake 0.8.7. Using bundle exec may solve this."
+* Reason: The system Rake (`gem list`) is conflicting with Rake that bundler installed (`bundle list`). 
+* Solution: bundle exec [command]
 
+
+!SLIDE splash
+
+# Questions #
