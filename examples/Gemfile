@@ -1,0 +1,15 @@
+source "http://rubygems.org"
+source "http://gems.sentryds.com"
+
+gem 'jabber-bot'
+gem 'nokogiri', '>= 1.4.2'
+gem 'RedCloth', '>= 4.1.0', '< 4.2.0'
+gem 'thin', '~>1.1' # Covers 1.1 - 2.0
+
+gem 'sentryds-util', :git => 'git://git.sentryds.com/Core/sentryds-util.git'
+
+group :development, :test do
+   gem 'mocha'
+   gem 'rspec', '2.0.1'
+   gem 'rdoc'
+end
