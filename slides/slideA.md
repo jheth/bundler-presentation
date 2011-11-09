@@ -113,9 +113,11 @@
 
 # Testing / Debugging #
 
-* bundle exec 
-	* bundle exec script.rb
-* bundle console
+* `bundle exec`
+	* `bundle exec spec ./spec/file.rb`
+	* `bundle install --binstubs`
+		* ./bin/spec ./spec/file.rb
+* `bundle console`
 	* IRB Sesssion with proper environment
 
 
