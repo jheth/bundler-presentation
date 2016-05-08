@@ -1,5 +1,5 @@
 
-![Bundler](/images/gembundler.png)
+![Bundler](images/gembundler.png)
 
 ### The parts you don't know about
 
