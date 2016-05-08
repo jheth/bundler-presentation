@@ -1,8 +1,0 @@
-{
-  "name": "Gem Bundler",
-  "description": "The best way to manage your application's dependencies",
-  "sections": [
-    {"section":"slides"}
-  ]
-}
-

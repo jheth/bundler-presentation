@@ -1,3 +1,6 @@
+##  Gemfile.lock
+
+```ruby
 GEM
   remote: https://rubygems.org/
   specs:
@@ -17,4 +20,5 @@ DEPENDENCIES
   sinatra
 
 BUNDLED WITH
-   1.12.3
+   1.11.2
+```

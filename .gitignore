@@ -1,3 +1,9 @@
-bin
-.bundle
-vendor
+node_modules
+bower_components
+dist
+*.log
+.sass-cache
+/index.html
+
+/.bundle
+/vendor

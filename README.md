@@ -1,1 +1,3 @@
-This is a presentation on using Gem Bundler which relies on the schacon/showoff gem.
+Reveal.js Slides for Gem Bundler Presentation given at Indy.rb - May 11th, 2016
+
+https://jheth.github.io/bundler-presentation/

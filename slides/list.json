@@ -1,0 +1,16 @@
+[
+    "index.md",
+    "getting-started.md",
+    "gemfile-lock.md",
+    "basics.md",
+    "bundle-config.md",
+    "gem-mining.md",
+    "build-options.md",
+    "local-git-repos.md",
+    "outdated-gems.md",
+    "visualize-it.md",
+    "bundle-clean.md",
+    "with-clean-env.md",
+    "gem-creation.md",
+    "install-options.md"
+]
