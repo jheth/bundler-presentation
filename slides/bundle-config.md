@@ -22,6 +22,4 @@ $ bundle config path
 
 $ bundle config --without production
 $ bundle config --bin true
-
-
 ```
