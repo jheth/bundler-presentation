@@ -1,0 +1,42 @@
+# A sample Gemfile
+source 'https://rubygems.org'
+# git_source(:stash){ |repo_name| "https://stash.corp.acme.pl/#{repo_name}.git" }
+
+ruby '2.3.0'
+
+gem 'sinatra'
+gem 'rack', '>=1.0'
+gem 'awesome_print', '~>1.0.0'
+
+# Require file different than ruby gem.
+gem 'ruby-graphviz', '1.0.5', require: 'graphviz'
+
+# Github
+
+# Specificy version when no gemspec available.
+gem 'nokogiri', '1.5', git: 'git@github.com:sparklemotion/nokogiri.git'
+# gem 'nokogiri', git: 'https://github.com/sparklemotion/nokogiri.git'
+# gem 'nokogiri', git: 'git://github.com/sparklemotion/nokogiri.git'
+
+gem 'kami', github: 'jheth/kami', branch: 'master'
+# gem 'kami', github: 'jheth/kami', ref: '8ac5c6a'
+# gem 'kami', github: 'jheth/kami', tag: 'v1.0'
+
+gem 'mailchimp-api', bitbucket: 'mailchimp/mailchimp-api-ruby', require: 'mailchimp'
+
+# gem 'rails', stash: 'forks/rails'
+
+# Local Filesystem
+gem 'soapforce', path: '/Users/jheth/soapforce'
+
+# Other Sources
+# gem 'multi_json', '1.11.2', source: 'http://localhost:8808'
+
+group :development do
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem 'rspec', require: 'spec'
+  gem 'simplecov', require: false
+end

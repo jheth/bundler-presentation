@@ -1,0 +1,15 @@
+/Users/jheth/.rvm/rubies/ruby-2.2.4/bin/ruby -r ./siteconf20160510-30529-1t1p4ae.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling breakpoint.c
+compiling byebug.c
+compiling context.c
+compiling locker.c
+compiling threads.c
+linking shared-object byebug/byebug.bundle
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 byebug.bundle ./.gem.20160510-30529-16kze9d/byebug

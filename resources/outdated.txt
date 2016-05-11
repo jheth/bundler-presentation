@@ -1,0 +1,14 @@
+Fetching git@github.com:sparklemotion/nokogiri.git
+Fetching git://github.com/jheth/kami.git
+Fetching https://mailchimp@bitbucket.org/mailchimp/mailchimp-api-ruby.git
+Fetching gem metadata from https://rubygems.org/
+Fetching version metadata from https://rubygems.org/
+Resolving dependencies...
+
+Outdated gems included in the bundle:
+  * awesome_print (newest 1.6.1, installed 1.0.2, requested ~> 1.0.0) in group "default"
+  * nokogiri (newest 1.6.7.2, installed 1.5 fe57e90, requested = 1.5) in group "default"
+  * ruby-graphviz (newest 1.2.2, installed 1.0.5, requested = 1.0.5) in group "default"
+  * mime-types (newest 3.0, installed 2.99.1)
+  * slop (newest 4.3.0, installed 3.6.0)
+
